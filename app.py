@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 from flask_cors import CORS
 app=Flask(__name__)
-CORS(app,origins=["http://localhost:3000"])
+CORS(app)
 @app.route("/")
 def home():
     return jsonify({"key":"This is flask api"})
@@ -31,5 +31,5 @@ def predict():
                            HDD,SSD,Gpu_Brand,Os]])
     
     model=pickle.load(open("pipeline.pkl","rb"))
-    
-    return jsonify({"price": np.exp((model.predict(input_query)[0]))})
+    price=model.predict(input_query)[0]
+    return jsonify({"price": price})
