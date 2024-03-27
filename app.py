@@ -32,4 +32,4 @@ def predict():
     
     model=pickle.load(open("pipeline.pkl","rb"))
     price=model.predict(input_query)[0]
-    return jsonify({"price": price})
+    return jsonify({"price": np.exp(price)})
